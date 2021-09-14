@@ -9,6 +9,7 @@
   .appAside {
 	width: 50%;
 	background-color:$bgYellow;
+	background-image: url('./assets/images/loginPic.jpg') no-repeat
   }
   
   .appForm {
@@ -146,4 +147,14 @@
   .socialMediaButtons {
 	padding: 10px 100px 10px 0px;
   }
-  
+  @media only screen and (max-width: 600px){
+	.appAside {
+		width: 0%;
+		
+	  }
+	  
+	  .appForm {
+		width: 100%;
+	
+	  }
+  }

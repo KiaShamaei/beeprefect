@@ -1,9 +1,18 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+interface IProps {
+}
 
-class SignUpForm extends Component {
-  constructor() {
-    super();
+interface IState {
+  email?: string;
+  password ?:string;
+  name ?: string,
+hasAgreed ?:  boolean;
+
+}
+class SignUpForm extends Component<IProps,IState> {
+  constructor(props : IProps) {
+    super(props);
 
     this.state = {
       email: "",
@@ -16,7 +25,7 @@ class SignUpForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
+  handleChange(event : React.ChangeEvent<HTMLInputElement>) {
     let target = event.target;
     let value = target.type === "checkbox" ? target.checked : target.value;
     let name = target.name;
@@ -26,8 +35,8 @@ class SignUpForm extends Component {
     });
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
+  handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
 
     console.log("The form was submitted with the following data:");
     console.log(this.state);
@@ -35,13 +44,14 @@ class SignUpForm extends Component {
 
   render() {
     return (
-      <div className="formCenter">
+      <div className="formCenter" >
         <form onSubmit={this.handleSubmit} className="formFields">
           <div className="formField">
             <label className="formFieldLabel" htmlFor="name">
               Full Name
             </label>
             <input
+			autoComplete="disabled"
               type="text"
               id="name"
               className="formFieldInput"
@@ -56,6 +66,7 @@ class SignUpForm extends Component {
               Password
             </label>
             <input
+			autoComplete="disabled"
               type="text"
               id="password"
               className="formFieldInput"
@@ -70,7 +81,8 @@ class SignUpForm extends Component {
               E-Mail Address
             </label>
             <input
-              type="email"
+			autoComplete="off"
+              type="text"
               id="email"
               className="formFieldInput"
               placeholder="Enter your email"
@@ -83,10 +95,11 @@ class SignUpForm extends Component {
           <div className="formField">
             <label className="formFieldCheckboxLabel">
               <input
+			  
                 className="formFieldCheckbox"
                 type="checkbox"
                 name="hasAgreed"
-                value={this.state.hasAgreed}
+                value={this.state.hasAgreed ? 1 : 0}
                 onChange={this.handleChange}
               />{" "}
               I agree all statements in{" "}
