@@ -5,19 +5,21 @@ interface IProps {
 
 interface IState {
   email?: string;
-  password ?:string;
-  name ?: string,
-hasAgreed ?:  boolean;
+  password?: string;
+  fname?: string,
+  lname?: string,
+  hasAgreed?: boolean;
 
 }
-class SignUpForm extends Component<IProps,IState> {
-  constructor(props : IProps) {
+class SignUpForm extends Component<IProps, IState> {
+  constructor(props: IProps) {
     super(props);
 
     this.state = {
       email: "",
       password: "",
-      name: "",
+      fname: "",
+      lname: "",
       hasAgreed: false
     };
 
@@ -25,7 +27,7 @@ class SignUpForm extends Component<IProps,IState> {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event : React.ChangeEvent<HTMLInputElement>) {
+  handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     let target = event.target;
     let value = target.type === "checkbox" ? target.checked : target.value;
     let name = target.name;
@@ -48,16 +50,31 @@ class SignUpForm extends Component<IProps,IState> {
         <form onSubmit={this.handleSubmit} className="formFields">
           <div className="formField">
             <label className="formFieldLabel" htmlFor="name">
-              Full Name
+              Name
             </label>
             <input
-			autoComplete="disabled"
+              autoComplete="disabled"
               type="text"
-              id="name"
+              id="fname"
               className="formFieldInput"
               placeholder="Enter your full name"
-              name="name"
-              value={this.state.name}
+              name="fname"
+              value={this.state.fname}
+              onChange={this.handleChange}
+            />
+          </div>
+          <div className="formField">
+            <label className="formFieldLabel" htmlFor="name">
+              Family name
+            </label>
+            <input
+              autoComplete="disabled"
+              type="text"
+              id="lname"
+              className="formFieldInput"
+              placeholder="Enter your full name"
+              name="lname"
+              value={this.state.lname}
               onChange={this.handleChange}
             />
           </div>
@@ -66,7 +83,7 @@ class SignUpForm extends Component<IProps,IState> {
               Password
             </label>
             <input
-			autoComplete="disabled"
+              autoComplete="disabled"
               type="text"
               id="password"
               className="formFieldInput"
@@ -81,7 +98,7 @@ class SignUpForm extends Component<IProps,IState> {
               E-Mail Address
             </label>
             <input
-			autoComplete="off"
+              autoComplete="off"
               type="text"
               id="email"
               className="formFieldInput"
@@ -95,7 +112,7 @@ class SignUpForm extends Component<IProps,IState> {
           <div className="formField">
             <label className="formFieldCheckboxLabel">
               <input
-			  
+
                 className="formFieldCheckbox"
                 type="checkbox"
                 name="hasAgreed"
