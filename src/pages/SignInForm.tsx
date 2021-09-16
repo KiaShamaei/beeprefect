@@ -9,10 +9,10 @@ interface IProps {
 
 interface IState {
   email?: string;
-  password ?:string;
+  password?: string;
 }
-class SignInForm extends Component<IProps,IState> {
-  constructor(props : any) {
+class SignInForm extends Component<IProps, IState> {
+  constructor(props: any) {
     super(props);
 
     this.state = {
@@ -23,15 +23,23 @@ class SignInForm extends Component<IProps,IState> {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  
-  handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    let target  = event.target;
-    let value = target.type === "checkbox" ? target.checked : target.value;
-    let name = target.name;
 
+  // handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+  //   let target = event.target;
+  //   let value = target.type === "checkbox" ? target.checked : target.value;
+  //   let name = target.name;
+
+  //   this.setState({
+  //     [name]: value
+  //   });
+  // }
+  handleChange : React.ChangeEventHandler<HTMLInputElement> = e=>{
+    let target = e.currentTarget ; 
+    let value = target.type === "checkbox" ? target.checked : target.value;
+    let name = target.name ;
     this.setState({
-      [name]: value
-    });
+      [name] :  value
+    })
   }
 
   handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -50,7 +58,7 @@ class SignInForm extends Component<IProps,IState> {
               E-Mail Address
             </label>
             <input
-			autoComplete="false"
+              autoComplete="false"
               type="email"
               id="email"
               className="formFieldInput"
@@ -66,7 +74,7 @@ class SignInForm extends Component<IProps,IState> {
               Password
             </label>
             <input
-			autoComplete="false"
+              autoComplete="false"
               type="text"
               id="password"
               className="formFieldInput"
